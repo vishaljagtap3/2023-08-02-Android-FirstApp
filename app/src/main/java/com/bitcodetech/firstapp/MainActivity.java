@@ -2,6 +2,7 @@ package com.bitcodetech.firstapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -53,20 +54,38 @@ public class MainActivity extends AppCompatActivity {
         //btnSetName.setOnKeyListener(new OnBtnSetNameKeyListener());
 
         //way 2
-        btnSetName.setOnClickListener(new OnBtnSetNameClickListener());
+        //btnSetName.setOnClickListener(new OnBtnSetNameClickListener());
 
         //way 3
-        txtName.setOnClickListener(
+       /* txtName.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         txtName.setText("");
                     }
                 }
-        );
+        );*/
+
+        //way 4
+
+        View.OnClickListener clickListener = new MyViewClickListener();
+        btnSetName.setOnClickListener(clickListener);
+        txtName.setOnClickListener(clickListener);
 
         setContentView(container);
 
+    }
+
+    private class MyViewClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            if(view == btnSetName) {
+                txtName.setText(edtName.getText().toString());
+            }
+            if(view == txtName) {
+                txtName.setText("");
+            }
+        }
     }
 
     private class OnBtnSetNameClickListener implements View.OnClickListener {
